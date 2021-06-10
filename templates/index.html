@@ -9,7 +9,21 @@
 </head>
 
 <body>
-
+	<form method="POST">
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		{% for msg in messages %}
+		<p>{{msg}}</p>
+		{% endfor %}
+		{% endif %}
+		{% endwith %}
+		{# This hidden_tag is a CSRF security feature. #}
+		{{ form.hidden_tag() }}
+		{{ form.email.label }} {{ form.email() }}
+		{{ form.firstname.label }} {{ form.firstname() }}
+		{{ form.lastname.label }} {{ form.lastname() }}
+		{{ form.submit() }}
+	</form>
 </body>
 
 </html>
